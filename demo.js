@@ -41,6 +41,9 @@ require(["algorithms", "plotter"], function (algorithms, plotter) {
             comparisonIndexString: '', // Slider controls this (it's a string!)
             matches: [],
             algorithm: 'naive',
+            toggledescription: false,
+            togglestats: false,
+            togglegraphblurb: false,
         },
 
         created: function() {

@@ -14,23 +14,26 @@
 </head>
 
 <body>
-    <h2>String search algorithm visualiser</h2>
-    <p>This app helps with visualising the behaviour of three classic string search
-    algorithms: the simple naive algorithm (which checks the pattern string for
-    a match at all possible positions), the
-    <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth-Morris-Pratt (KMP)</a> algorithm
-    and the <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm">
-    Boyer-Moore algorithm</a>. The latter comes in two flavours: a simple
-    version, known as Boyer-Moore-Horspool that uses only the Bad Character
-    heuristic, and the full version using the Good Suffix heuristic as well.</p>
-    <p>The code for the full Boyer Moore algorithm has been translated from
-    the C version at
-    <a href="http://wiki.dreamrunner.org/public_html/Algorithms/TheoryOfAlgorithms/Boyer-Moore_string_search_algorithm.html">
-    wiki.dreamrunner.org</a>.</p>
-    <p>Since the Boyer-Moore implementations search only ASCII characters,
-    all non-ASCII characters are removed from both the pattern and the strings when using
-    those algorithms.</p>
     <div id="app">
+        <h1>String search algorithm visualiser</h1>
+        <div  v-show="toggledescription">
+        <p>This app helps with visualising the behaviour of three classic string search
+        algorithms: the simple naive algorithm (which checks the pattern string for
+        a match at all possible positions), the
+        <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth-Morris-Pratt (KMP)</a> algorithm
+        and the <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm">
+        Boyer-Moore algorithm</a>. The latter comes in two flavours: a simple
+        version, known as Boyer-Moore-Horspool that uses only the Bad Character
+        heuristic, and the full version using the Good Suffix heuristic as well.</p>
+        <p>The code for the full Boyer Moore algorithm has been translated from
+        the C version at
+        <a href="http://wiki.dreamrunner.org/public_html/Algorithms/TheoryOfAlgorithms/Boyer-Moore_string_search_algorithm.html">
+        wiki.dreamrunner.org</a>.</p>
+        <p>Since the Boyer-Moore implementations search only ASCII characters,
+        all non-ASCII characters are removed from both the pattern and the strings when using
+        those algorithms.</p>
+        </div>
+        <a href="#" @click="toggledescription=!toggledescription" class="toggle">Show/hide description</a>
         <form @submit.prevent="onSubmit">
             <div class="form-group">
                 <label for="algorithm">Algorithm</label>
@@ -66,7 +69,12 @@
             </table>
 
         </div>
-        <div class="statistics">
+        <div class="buttons">
+            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
+            <button type="button" class="btn btn-primary" v-on:click="previous" v-bind:disabled=previousDisabled>Previous</button>
+            <input type="range" id='range-slider' name="compslider" min="0" v-bind:max="comparisonsMax" v-model="comparisonIndexString" />
+        </div>
+        <div v-show="togglestats" class="statistics">
             <table>
                 <tr>
                     <td class="statlabel">Text length (n)</td>
@@ -103,21 +111,20 @@
 
             </table>
         </div>
-        <div class="buttons">
-            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
-            <button type="button" class="btn btn-primary" v-on:click="previous" v-bind:disabled=previousDisabled>Previous</button>
-            <input type="range" id='range-slider' name="compslider" min="0" v-bind:max="comparisonsMax" v-model="comparisonIndexString" />
-        </div>
+        <a href="#" @click="togglestats=!togglestats" class="toggle">Show/hide state table</a>
+
     </div>
+
+    <div style="clear:both;"></div>
+
     <div id="plotArea">
         <h2>Comparison Trajectory</h2>
-        <p>The following plot shows all the (i, j) indices of the character
+        <div id="comparisonsplot"></div>
+        <p>The above plot shows all the (i, j) indices of the character
         comparisons made during the whole algorithm. (i, j) are the indices
         into the text and the pattern, respectively. Gold stars show points
         where a match is detected. A red circle shows the current point in
-        the simulation.
-        </p>
-        <div id="comparisonsplot" width="400px" height="400px"></div>
+        the simulation.</p>
     </div>
 <script src="./require.js"></script>
 <script src="./demo.js"></script>
