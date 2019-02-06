@@ -75,7 +75,7 @@
             <input type="range" id='range-slider' name="compslider" min="0" v-bind:max="comparisonsMax" v-model="comparisonIndexString" />
         </div>
         <div v-show="togglestats" class="statistics">
-            <table>
+            <table class="statstable">
                 <tr>
                     <td class="statlabel">Text length (n)</td>
                     <td class="stat">{{n}}</td>
@@ -92,6 +92,8 @@
                     <td class="statlabel">Pattern index (j)</td>
                     <td class="stat">{{j}}</td>
                 </tr>
+            </table>
+            <table class="statstable">
                 <tr>
                     <td class="statlabel">Pattern shift (i - j)</td>
                     <td class="stat">{{ i - j }}</td>
