@@ -1,0 +1,83 @@
+html, body {
+    margin: 0px;
+    padding: 10px;
+    border: 0px;
+    color: #000;
+    background: #fff;
+}
+
+select#algorithm {
+    display: inline;
+}
+
+a.sourcelink {
+    padding-left: 20px;
+}
+
+table.strings {
+    border-collapse: collapse;
+}
+
+td.table-char {
+    font-family: monospace;
+    color: grey;
+    border: none;
+    font-size: 24px;
+    width: 15px;
+}
+
+td.current {
+    background-color: red;
+    color: black;
+}
+
+td.match {
+    background-color: lightgreen;
+}
+
+div.display-area {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    outline: 1px solid lightgrey;
+}
+
+td.statlabel {
+    text-align: right;
+    border: 1px solid lightgrey;
+    padding: 5px;
+}
+
+td.stat {
+    padding: 10px;
+    width: 60px;
+    border: 1px solid lightgrey;
+    text-align: right;
+}
+
+button.btn {
+    margin: 5px;
+}
+
+div.statistics {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+div.buttons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div#plotArea {
+    padding-top: 30px;
+}
+
+#range-slider {
+    width: 300px;
+}
+
+

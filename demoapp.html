@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="./demo.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>String search visualiser</title>
+
+</head>
+
+<body>
+    <h2>String search algorithm visualiser</h2>
+    <p>This app helps with visualising the behaviour of three classic string search
+    algorithms: the simple naive algorithm (which checks the pattern string for
+    a match at all possible positions), the
+    <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth-Morris-Pratt (KMP)</a> algorithm
+    and the <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm">
+    Boyer-Moore algorithm</a>. The latter comes in two flavours: a simple
+    version, known as Boyer-Moore-Horspool that uses only the Bad Character
+    heuristic, and the full version using the Good Suffix heuristic as well.</p>
+    <p>The code for the full Boyer Moore algorithm has been translated from
+    the C version at
+    <a href="http://wiki.dreamrunner.org/public_html/Algorithms/TheoryOfAlgorithms/Boyer-Moore_string_search_algorithm.html">
+    wiki.dreamrunner.org</a>.</p>
+    <p>Since the Boyer-Moore implementations search only ASCII characters,
+    all non-ASCII characters are removed from both the pattern and the strings when using
+    those algorithms.</p>
+    <div id="app">
+        <form @submit.prevent="onSubmit">
+            <div class="form-group">
+                <label for="algorithm">Algorithm</label>
+                <select class="form-control w-auto" id="algorithm" v-on:change="start" v-model="algorithm">
+                    <option v-for="algo in algorithmList" v-bind:value=algo[0]>{{algo[1]}}</option>
+                </select>
+                <a v-bind:href=sourceurl target="_blank" class="sourcelink">Algorithm source code (JavaScript)</a>
+            </div>
+            <div class="form-group">
+                <label for="searchtext">Text to search</label>
+                <input id="searchtext" class="form-control" v-model="textInput" type="text" />
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="pattern">Search pattern</label>
+                <input id="pattern" class="form-control w-auto" v-model="patternInput" type="text" size="20" />
+            </div>
+
+            <!--div class="form-group">
+                <button type="button" class="btn btn-primary" v-on:click="start">Start</button>
+            </div-->
+        </form>
+
+        <div class="display-area">
+
+            <table class="strings">
+                <tr>
+                    <td v-for="i in n" v-bind:class=textClass(i)>{{ text[i - 1] }}</td>
+                </tr>
+                <tr>
+                    <td v-for="i in n" v-bind:class=patternClass(i)>{{ patternChar(i - 1) }}</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="statistics">
+            <table>
+                <tr>
+                    <td class="statlabel">Text length (n)</td>
+                    <td class="stat">{{n}}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Pattern length (m)</td>
+                    <td class="stat">{{m}}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Text index (i)</td>
+                    <td class="stat">{{i}}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Pattern index (j)</td>
+                    <td class="stat">{{j}}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Pattern shift (i - j)</td>
+                    <td class="stat">{{ i - j }}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Comparisons</td>
+                    <td class="stat">{{ comparisonIndex + 1}}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Total comparisons</td>
+                    <td class="stat">{{ comparisons.length }}</td>
+                </tr>
+                <tr>
+                    <td class="statlabel">Num matches</td>
+                    <td class="stat">{{ matches.length }}</td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
+            <button type="button" class="btn btn-primary" v-on:click="previous" v-bind:disabled=previousDisabled>Previous</button>
+            <input type="range" id='range-slider' name="compslider" min="0" v-bind:max="comparisonsMax" v-model="comparisonIndexString" />
+        </div>
+    </div>
+    <div id="plotArea">
+        <h2>Comparison Trajectory</h2>
+        <p>The following plot shows all the (i, j) indices of the character
+        comparisons made during the whole algorithm. (i, j) are the indices
+        into the text and the pattern, respectively. Gold stars show points
+        where a match is detected. A red circle shows the current point in
+        the simulation.
+        </p>
+        <div id="comparisonsplot" width="400px" height="400px"></div>
+    </div>
+<script src="./require.js"></script>
+<script src="./demo.js"></script>
+</body>
+
+</html>
