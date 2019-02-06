@@ -37,7 +37,7 @@ define([], function() {
             { xaxis: { title: "i", dtick: 1, range: [-0.2, maxx + 0.2] },
               yaxis: { title: "j", dtick: 1, range: [-0.5, maxy + 0.5] },
               showlegend: false,
-
+              height: 300,
               margin: {
                    l: 60,
                    r: 30,
