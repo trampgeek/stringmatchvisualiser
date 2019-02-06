@@ -25,7 +25,7 @@ define([], function () {
     // If c does not occur in pat, last[c] = pat.length.
     function bad_character_table(pat) {
         var i, last;
-        last = new Array(ALPHABET_LEN).fill(pat.length);
+        last = new Array(ALPHABET_LEN).fill(-1);
 
         for (i = 0; i < pat.length - 1; i++) {
             last[ord(pat[i])] = i;
@@ -34,28 +34,29 @@ define([], function () {
     }
 
     function simpleBoyerMoore(pattern, text) {
-        var i = 0, j, c, shift;
+        var pos = 0,  // Index of left end of pattern within text
+            j, c, shift;
             comparisons = [],
             matches = [],
             m = pattern.length,
             last = bad_character_table(pattern),
-            equal = function(i, j) {
-                    comparisons.push([i, j]);
-                    return text[i] == pattern[j];
+            equal = function(pos, j) {
+                    comparisons.push([pos, j]);
+                    return text[pos] == pattern[j];
             };
 
-        while (i <= text.length - m) {
+        while (pos <= text.length - m) {
             j = m - 1;
-            while (j >= 0 && equal(i + j, j)) {
+            while (j >= 0 && equal(pos + j, j)) {
                 j -= 1;
             }
             if (j < 0) {
                 matches.push(comparisons.length - 1);
-                i += 1;
+                pos += 1;
             } else {
-                c = text[i + j];
+                c = text[pos + j];
                 shift = j - last[ord(c)];
-                i += Math.max(1, shift);
+                pos += Math.max(1, shift);
             }
         }
 
