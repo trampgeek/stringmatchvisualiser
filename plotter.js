@@ -41,7 +41,7 @@ define([], function() {
               margin: {
                    l: 60,
                    r: 30,
-                   b: 10,
+                   b: 60,
                    t: 10,
                    pad: 10
                 },
