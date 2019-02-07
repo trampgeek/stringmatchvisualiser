@@ -33,7 +33,7 @@
         all non-ASCII characters are removed from both the pattern and the strings when using
         those algorithms.</p>
         </div>
-        <a href="#" @click="toggledescription=!toggledescription" class="toggle">Show/hide description</a>
+        <a href="#" @click="toggledescription=!toggledescription" class="toggle">{{ toggledescription ? 'Hide' : 'Show' }} description</a>
         <form @submit.prevent="onSubmit">
             <div class="form-group">
                 <label for="algorithm">Algorithm</label>
@@ -113,7 +113,7 @@
 
             </table>
         </div>
-        <a href="#" @click="togglestats=!togglestats" class="toggle">Show/hide state table</a>
+        <a href="#" @click="togglestats=!togglestats" class="toggle">{{ togglestats ? 'Hide' : 'Show' }} state table</a>
 
     </div>
 
