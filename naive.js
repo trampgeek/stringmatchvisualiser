@@ -1,19 +1,20 @@
 // The Naive string find function module.
+// In this algorithm the text index i is given by shift + j.
 define([], function() {
     function naive(pattern, text) {
             var n = text.length,
                 m = pattern.length,
                 comparisons = [],
                 matches = [],
-                i, j,
+                shift, j,
                 equal = function (textIndex, patIndex) {
                     comparisons.push([textIndex, patIndex]);
                     return text[textIndex] == pattern[patIndex];
                 };
 
-            for (i = 0; i <= n - m; i++) {
+            for (shift = 0; shift <= n - m; shift++) {
                 j = 0;
-                while (j < m && equal(i + j, j)) {
+                while (j < m && equal(shift + j, j)) {
                     j += 1;
                 }
                 if (j ==  m) {
