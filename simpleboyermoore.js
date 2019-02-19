@@ -24,7 +24,7 @@ define([], function () {
     // pattern of the last occurrence of c for each character c in the alphabet.
     // If c does not occur in pat, last[c] = pat.length.
     function bad_character_table(pat) {
-        var i, last, m = pat.length;
+        var i, m = pat.length;
         shift = new Array(ALPHABET_LEN).fill(m);
         for (i = 0; i < m - 1; i++) {
             shift[ord(pat[i])] = m - i - 1;
@@ -55,7 +55,7 @@ define([], function () {
                 matches.push(comparisons.length - 1);
                 i += m + 1
             } else {
-                i += shift[ord(text[i])];
+                i += Math.max(m - j, shift[ord(text[i])]);
             }
         }
 
