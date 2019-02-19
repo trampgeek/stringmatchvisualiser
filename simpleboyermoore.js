@@ -20,43 +20,42 @@ define([], function () {
         return c.charCodeAt(0);
     }
 
-    // Bad character table: last[c] contains the index in pat of the
-    // last occurrence within pat of each character c in the alphabet.
+    // Bad character table: last[c] contains the distance from the end of the
+    // pattern of the last occurrence of c for each character c in the alphabet.
     // If c does not occur in pat, last[c] = pat.length.
     function bad_character_table(pat) {
-        var i, last;
-        last = new Array(ALPHABET_LEN).fill(-1);
-
-        for (i = 0; i < pat.length - 1; i++) {
-            last[ord(pat[i])] = i;
+        var i, last, m = pat.length;
+        shift = new Array(ALPHABET_LEN).fill(m);
+        for (i = 0; i < m - 1; i++) {
+            shift[ord(pat[i])] = m - i - 1;
         }
-        return last;
+        return shift;
     }
 
     function simpleBoyerMoore(pattern, text) {
-        var pos = 0,  // Index of left end of pattern within text
-            j, c, shift;
+        var i,
+            j,
             comparisons = [],
             matches = [],
             m = pattern.length,
-            last = bad_character_table(pattern),
+            shift = bad_character_table(pattern),
             equal = function(pos, j) {
                     comparisons.push([pos, j]);
                     return text[pos] == pattern[j];
             };
 
-        while (pos <= text.length - m) {
+        i = m - 1;
+        while (i < text.length) {
             j = m - 1;
-            while (j >= 0 && equal(pos + j, j)) {
+            while (j >= 0 && equal(i, j)) {
+                i -= 1;
                 j -= 1;
             }
             if (j < 0) {
                 matches.push(comparisons.length - 1);
-                pos += 1;
+                i += m + 1
             } else {
-                c = text[pos + j];
-                shift = j - last[ord(c)];
-                pos += Math.max(1, shift);
+                i += shift[ord(text[i])];
             }
         }
 

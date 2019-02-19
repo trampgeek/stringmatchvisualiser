@@ -45,7 +45,8 @@ define([], function () {
     function suffix_length(word, pos) {
         // increment suffix length i to the first mismatch or beginning
         // of the word
-        for (var i = 0; (word[pos - i] == word[word.length - 1 - i]) && (i < pos); i++) {};
+        for (var i = 0; (word[pos - i] == word[word.length - 1 - i]) && (i < pos); i++) {
+        }
         return i;
     }
 
@@ -108,12 +109,12 @@ define([], function () {
         return delta2;
     }
 
-    function boyer_moore (pat, string) {
+    function boyer_moore (pat, text) {
         var i, j, delta1, delta2, comparisons, matches;
 
         function equal(i, j) {
             comparisons.push([i, j]);
-            return string[i] == pat[j];
+            return text[i] == pat[j];
         }
 
         delta1 = make_delta1(pat);
@@ -127,7 +128,7 @@ define([], function () {
         }
 
         i = pat.length - 1;
-        while (i < string.length) {
+        while (i < text.length) {
             j = pat.length - 1;
             while (j >= 0 && equal(i, j)) {
                 --i;
@@ -137,7 +138,7 @@ define([], function () {
                 matches.push(comparisons.length - 1);
                 i += pat.length + 1;
             } else {
-                i += Math.max(delta1[ord(string[i])], delta2[j]);
+                i += Math.max(delta1[ord(text[i])], delta2[j]);
             }
         }
         return { comparisons: comparisons, matches: matches};
