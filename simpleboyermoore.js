@@ -26,7 +26,7 @@ define([], function () {
     function bad_character_table(pat) {
         var i, m = pat.length;
         shift = new Array(ALPHABET_LEN).fill(m);
-        for (i = 0; i < m - 1; i++) {
+        for (i = 0; i < m; i++) {
             shift[ord(pat[i])] = m - i - 1;
         }
         return shift;
