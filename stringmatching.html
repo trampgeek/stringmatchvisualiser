@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="./demo.css">
+    <link rel="stylesheet" href="./stringmatching.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <title>String search visualiser</title>
+    <title>String matching algorithm visualiser</title>
 
 </head>
 
 <body>
     <div id="app">
-        <h1>String search algorithm visualiser</h1>
+        <h1>String matching algorithm visualiser</h1>
         <div  v-show="toggledescription">
-        <p>This app helps with visualising the behaviour of three classic string search
+        <p>This app helps with visualising the behaviour of three classic string matching
         algorithms: the simple naive algorithm (which checks the pattern string for
         a match at all possible positions), the
         <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth-Morris-Pratt (KMP)</a> algorithm
@@ -128,8 +128,7 @@
         where a match is detected. A red circle shows the current point in
         the simulation.</p>
     </div>
-<script src="./require.js"></script>
-<script src="./demo.js"></script>
+<script data-main="src/stringmatching.js" src="./require.js"></script>
 </body>
 
 </html>

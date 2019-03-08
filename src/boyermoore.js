@@ -123,7 +123,7 @@ define([], function () {
         matches = [];
 
         // The empty pattern must be considered specially
-        if (pat.length == 0) {
+        if (pat.length === 0) {
             return [0];
         }
 

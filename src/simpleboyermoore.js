@@ -53,7 +53,7 @@ define([], function () {
             }
             if (j < 0) {
                 matches.push(comparisons.length - 1);
-                i += m + 1
+                i += m + 1;
             } else {
                 i += Math.max(m - j, shift[ord(text[i])]);
             }

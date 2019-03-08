@@ -46,7 +46,8 @@ define([], function() {
                    pad: 10
                 },
             },
-            { displayModeBar: false, staticPlot: true},);
+            { displayModeBar: false, staticPlot: true}
+        );
 
         // Overwrite points at which matches occurred with a star
         if (searchRec.matches.length > 0) {

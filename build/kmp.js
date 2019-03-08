@@ -1,0 +1,2 @@
+/*! stringmatchvisualiser 2019-03-09 */
+define([],function(){function a(a,b){var c=new Array(a.length+1).fill(0),d=0,e=1,f=0,g=[],h=[],i=function(c,d){return g.push([c,d]),b[c]==a[d]};for(c[0]=-1,c[1]=0;e<a.length;){for(;f>=0&&a[e]!=a[f];)f=c[f];e+=1,f+=1,c[e]=f}for(e=0;d<b.length;){for(;e>=0&&!i(d,e);)e=c[e];d+=1,e+=1,e==a.length&&(h.push(g.length-1),e=c[e])}return{comparisons:g,matches:h}}return a});

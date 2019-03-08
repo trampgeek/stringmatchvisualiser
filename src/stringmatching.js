@@ -167,7 +167,7 @@ require(["algorithms", "plotter"], function (algorithms, plotter) {
                 return algorithms.list;
             },
             sourceurl: function () {
-                return "./" + this.algorithm + '.js';
+                return "./src/" + this.algorithm + '.js';
             },
         },
 
