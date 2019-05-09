@@ -70,8 +70,8 @@
 
         </div>
         <div class="buttons">
-            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
             <button type="button" class="btn btn-primary" v-on:click="previous" v-bind:disabled=previousDisabled>Previous</button>
+            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
             <input type="range" id='range-slider' name="compslider" min="0" v-bind:max="comparisonsMax" v-model="comparisonIndexString" />
         </div>
         <div v-show="togglestats" class="statistics">

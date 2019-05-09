@@ -1,2 +1,2 @@
-/*! stringmatchvisualiser 2019-03-09 */
+/*! stringmatchvisualiser 2019-05-08 */
 define([],function(){function a(a){return a.charCodeAt(0)}function b(b){var c,e=b.length;for(shift=new Array(d).fill(e),c=0;c<e;c++)shift[a(b[c])]=e-c-1;return shift}function c(c,d){var e,f,g=[],h=[],i=c.length,j=b(c),k=function(a,b){return g.push([a,b]),d[a]==c[b]};for(e=i-1;e<d.length;){for(f=i-1;f>=0&&k(e,f);)e-=1,f-=1;f<0?(h.push(g.length-1),e+=i+1):e+=Math.max(i-f,j[a(d[e])])}return{comparisons:g,matches:h}}var d=256;return c});
