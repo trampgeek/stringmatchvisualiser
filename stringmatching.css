@@ -24,9 +24,26 @@ table.strings {
     border-collapse: collapse;
 }
 
+table.strings td {
+    width: 25px;
+    text-align:center
+}
+
+table.strings tr.label-row td {
+    font-size: smaller;
+}
+
+table.strings td.row-label {
+    font-size: medium;
+    #font-weight: bold;
+    border-right: solid 1px lightgray;
+    padding-right: 5px;
+    text-align: right;
+}
+
 td.table-char {
     font-family: monospace;
-    color: grey;
+    color: #696969;
     border: none;
     font-size: 24px;
     width: 15px;

@@ -60,10 +60,16 @@
         <div class="display-area">
 
             <table class="strings">
+                <tr class="label-row">
+                    <td class="row-label">i: </td>
+                    <td v-for="i in n" v-bind:class=textClass(i)>{{ i - 1 }}</td>
+                </tr>
                 <tr>
+                    <td class="row-label">Text:</td>
                     <td v-for="i in n" v-bind:class=textClass(i)>{{ text[i - 1] }}</td>
                 </tr>
                 <tr>
+                    <td class="row-label">Pattern:</td>
                     <td v-for="i in n" v-bind:class=patternClass(i)>{{ patternChar(i - 1) }}</td>
                 </tr>
             </table>
